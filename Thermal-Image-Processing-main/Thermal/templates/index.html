@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thermal Image Processing</title>
+    <!-- Bootstrap CSS library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS styles */
+        body {
+            background-color: #292826;
+            color: #fff;
+        }
+        h1 {
+            color: #F9D142;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .btn {
+            background-color: #F9D142;
+            border-color: #F9D142;
+            margin-bottom: 10px; /* Add margin to buttons */
+            width: 100%; /* Make all buttons the same length */
+        }
+        .btn-custom {
+            background-color: #F9D142;
+            border-color: #F9D142;
+            /* Add any custom styles for these buttons */
+        }
+        .btn:hover {
+            background-color: #F9D142;
+            border-color: #F9D142;
+        }
+        input[type=file],
+        .btn-custom {
+            width: auto; /* Reset width for these buttons */
+        }
+        input[type=file] {
+            color: #292826;
+        }
+        .container {
+            text-align: center;
+        }
+        img {
+            margin-top: 40px;
+        }
+        .box {
+            background-color: #292826;
+            color: #fff;
+            border: 2px solid #F9D142;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+    <script>
+        function showImage(filename) {
+            var img = document.getElementById("myImage");
+            img.src = "{{ url_for('static', filename='') }}" + filename;
+        }
+        
+    </script>
+</head>
+<body>
+    
+    <div class="container">
+        
+        <h1 style="font-size:60px;">Thermal Image Processing</h1>
+        <br>
+        <img src="static/sample.png" alt="Displadyed Image"  style="width: 40%; height: 40%">
+        <br>
+        <br>
+        <form method="POST" enctype="multipart/form-data" action="/predict">
+            <input type="file" class="btn-custom" name="image">
+            <br>
+            <br>
+            <input type="submit" class="btn-custom" value="Process">
+        </form>
+
+        <h1>Display Images</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('{{ imgname }}')">Original image</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('thresh1.jpg')">Threshold level 1</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('thresh2.jpg')">Threshold level 2</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('thresh3.jpg')">Threshold level 3</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('contra.jpg')">Contour</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('edges.jpg')">Edge detection</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('histogram.jpg')">Histogram equalized</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('noise_reduction.jpg')">Noise Reduced</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('colormapped_image.jpg')">Colour Mapping</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('erosion.jpg')">Erosion</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('dilation.jpg')">Dilation</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('bilateral_filtered.jpg')">Bilateral Filtered</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('circles_detected.jpg')">Hough circles</button>
+            </div> 
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('grabcut_result.jpg')">Grab Cut</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('corners.jpg')">corners</button>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('lbp.jpg')">LocalBinaryPattern</button>
+            </div> 
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('sharpened.jpg')">sharpened image</button>
+            </div> 
+            <div class="col-md-4">
+                <button class="btn" onclick="showImage('log_transformed.jpg')">log transformed</button>
+            </div> 
+
+        </div>
+        <br>
+        <img id="myImage">
+        <div id="imageTextField" class="mt-3" style="color: white";"></div>
+    </div>
+
+    <!-- Bootstrap JS library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
